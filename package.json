@@ -10,6 +10,7 @@
   "author": "HackYourFuture",
   "license": "CC-BY-4.0",
   "dependencies": {
+    "axios": "^0.19.2",
     "eslint": "^6.2.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.0.0",
