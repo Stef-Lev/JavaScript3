@@ -1,6 +1,8 @@
 "use strict"
+
 //XMLHttp request function
 let xhr = new XMLHttpRequest;
+
 function requestXml() {
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -16,12 +18,11 @@ function requestXml() {
 document.querySelector("#xmlhttp").addEventListener("click", requestXml)
 
 //Axios request function
-const axios = require('axios').default;
+
 function requestAxios() {
     axios
         .get("https://www.randomuser.me/api")
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error))
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
 }
 document.querySelector("#axios").addEventListener("click", requestAxios);
-
