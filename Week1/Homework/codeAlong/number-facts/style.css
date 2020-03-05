@@ -1,0 +1,11 @@
+body {
+    background-color: rgb(19, 16, 16);
+}
+
+div.card {
+    background-color: rgb(4, 98, 141);
+}
+
+#fact {
+    display: none;
+}
