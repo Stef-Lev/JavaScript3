@@ -1,0 +1,36 @@
+.alert-error {
+  color: red;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body {
+  font-family: Roboto;
+}
+
+header {
+
+  border: 1px solid rgb(38, 100, 194);
+  border-radius: 5px;
+  box-shadow: 5px 5px rgb(113, 144, 165);
+  background-color: rgb(38, 100, 194);
+  margin-bottom: 10px;
+  color: white;
+  padding: 10px;
+
+}
+
+.container {
+  padding: 50px 20px;
+}
+
+.info-block {
+  padding: 10px;
+  margin: 20px 0;
+  border: 1px solid rgb(17, 17, 17);
+  border-radius: 5px;
+  box-shadow: 5px 5px rgb(141, 141, 141);
+}
