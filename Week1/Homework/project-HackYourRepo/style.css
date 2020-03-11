@@ -1,36 +1,42 @@
 .alert-error {
-  color: red;
+    color: red;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgb(240, 198, 198);
+    background-color: rgb(240, 198, 198);
+    border-radius: 5px;
+    box-shadow: 3px 3px rgb(255, 175, 175);
+    font-weight: bold;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
+
 body {
-  font-family: Roboto;
+    font-family: Roboto;
 }
 
 header {
-
-  border: 1px solid rgb(38, 100, 194);
-  border-radius: 5px;
-  box-shadow: 5px 5px rgb(113, 144, 165);
-  background-color: rgb(38, 100, 194);
-  margin-bottom: 10px;
-  color: white;
-  padding: 10px;
-
+    border: 1px solid rgb(38, 100, 194);
+    border-radius: 5px;
+    box-shadow: 3px 3px rgb(113, 144, 165);
+    background-color: rgb(38, 100, 194);
+    margin-bottom: 10px;
+    color: white;
+    padding: 10px;
 }
 
 .container {
-  padding: 50px 20px;
+    padding: 50px 20px;
 }
 
 .info-block {
-  padding: 10px;
-  margin: 20px 0;
-  border: 1px solid rgb(17, 17, 17);
-  border-radius: 5px;
-  box-shadow: 5px 5px rgb(141, 141, 141);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid rgb(17, 17, 17);
+    border-radius: 5px;
+    box-shadow: 3px 3px rgb(141, 141, 141);
 }
