@@ -42,16 +42,22 @@
         createAndAppend('section', theRoot, {
             text: `
             <div class="prop-text">
-            <p><strong>Repository: </strong></p>
-            <p><strong>Description: </strong></p>
-            <p><strong>Forks: </strong></p>
-            <p><strong>Updated: </strong></p>
+            <div class="row">
+            <p class="property"><strong>Repository: </strong></p>
+            <p class="value"><a href="${repo.html_url}">${repo.name}</a></p>
             </div>
-            <div class="prop-value">
-            <p><a href="${repo.html_url}">${repo.name}</a></p>
-            <p>${repo.description}</p>
-            <p>${repo.forks_count}</p>
-            <p>${repo.updated_at.slice(8, 10)}/${repo.updated_at.slice(5, 7)}/${repo.updated_at.slice(0, 4)},${repo.updated_at.slice(12, -1)}</p>
+            <div class="row">
+            <p class="property"><strong>Description: </strong></p>
+            <p class="value">${repo.description}</p>
+            </div>
+            <div class="row">
+            <p class="property"><strong>Forks: </strong></p>
+            <p class="value">${repo.forks_count}</p>
+            </div>
+            <div class="row">
+            <p class="property"><strong>Updated: </strong></p>
+            <p class="value">${repo.updated_at.slice(8, 10)}/${repo.updated_at.slice(5, 7)}/${repo.updated_at.slice(0, 4)}, ${repo.updated_at.slice(12, -1)}</p>
+            </div>
             </div>
             `,
             class: "info-block"
