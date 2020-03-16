@@ -1,61 +1,75 @@
 .alert-error {
-    color: red;
+    color: white;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid rgb(240, 198, 198);
-    background-color: rgb(240, 198, 198);
-    border-radius: 5px;
-    box-shadow: 3px 3px rgb(255, 175, 175);
+    background-color: rgb(226, 61, 61);
+    border-radius: 3px;
     font-weight: bold;
 }
 
 * {
     margin: 0;
     padding: 0;
-    list-style: none;
 }
 
 body {
-    font-family: Roboto;
-    background-color: rgb(230, 230, 230);
+    font-family: 'Baloo Chettan 2', cursive;
+    font-size: 1.1rem ;
+    background: rgb(162,159,139);
+    background: linear-gradient(90deg, rgba(162,159,139,1) 0%, rgba(255,255,255,1) 0%, rgba(208,229,255,1) 100%);
 }
 
 header {
-    border: 1px solid rgb(38, 100, 194);
-    border-radius: 5px;
-    box-shadow: 3px 3px rgb(126, 126, 126);
-    background-color: rgb(38, 100, 194);
-    margin-bottom: 10px;
+    border-radius: 3px;
+    background: rgb(162,159,139);
+    background: linear-gradient(90deg, rgba(162,159,139,1) 0%, rgba(56,99,161,1) 0%, rgba(56,161,147,1) 100%);
     color: white;
-    padding: 10px;
+    padding: 20px;
 }
 
 .container {
-    padding: 50px 20px;
+    padding: 20px;
 }
 
-
 .info-block {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 3%;
     flex-direction: column;
     background-color: white;
     padding: 20px;
     margin: 10px 0;
     border: 1px solid rgb(17, 17, 17);
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 3px 3px rgb(141, 141, 141);
 }
-.row{
+.row {
     display: flex;
     flex-direction: row;
 }
-.property {
-    flex: 0 0 33%;
+
+#repo-selection {
+    display: inline;
+    font-size: 1.5rem;
+    font-family: 'Baloo Chettan 2', cursive;
+    padding: 0px 5px;
+    margin-left: 20px;
+    border-radius: 5px;
 }
 
-.prop-text {
-margin-right: 1.5rem;
-display: block;
+.header-content > h1{
+    display: inline;
+    font-size: 1.7rem;
+}
+
+
+.main-container {
+    display: grid;
+    grid-gap: 2%;
+    grid-template-columns: 1fr;
+}
+.user-photo {
+    display: inline;
 }
 
 @media screen and (max-width: 360px) {
@@ -64,22 +78,20 @@ display: block;
     }
   }
 
-
 @media screen and (min-width: 640px) {
-    .property {
-        flex: 0 0 25%;
-    }
+    
   }
 
 @media screen and (min-width: 768px) {
-    .property {
-        flex: 0 0 20%;
+    .main-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin: 20px 0;
     }
+    
   }
 
   @media screen and (min-width: 900px) {
-    .property {
-        flex: 0 0 15%;
-    }
+    
   }
 

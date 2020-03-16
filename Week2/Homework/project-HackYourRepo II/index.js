@@ -1,26 +1,23 @@
-'use strict';
+"use strict";
 
 {
 
-    let theRoot = document.querySelector("#root")
+    let theRoot = document.querySelector("#root");
+    let mainCont = document.querySelector(".main-container")
+    let repoCont = document.querySelector(".repo-container");
+    let contrCont = document.querySelector(".contributor-container");
+    let repoSelect = document.querySelector("#repo-selection");
 
+    //--OK-->
     function fetchJSON(url, cb) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.responseType = 'json';
-        xhr.onload = () => {
-            if (xhr.status >= 200 && xhr.status <= 299) {
-                cb(null, xhr.response)
-                console.log("Loaded!");
-                console.log(xhr.response);
-            } else {
-                cb(new Error(`Network error: ${xhr.status} - ${xhr.statusText}`));
-            }
-        };
-        xhr.onerror = () => cb(new Error('Network request failed'));
-        xhr.send();
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => console.log("Loaded!", data))
+            .catch(err => cb(new Error(`Network error: ${err.status} - ${err.statusText}`)));
     }
+    //--OK--<
 
+    //--OK-->
     function createAndAppend(name, parent, options = {}) {
         const elem = document.createElement(name);
         parent.appendChild(elem);
@@ -33,32 +30,28 @@
         });
         return elem;
     }
+    //--OK--<
 
+
+    //--OK-->
     function sortThemAll(repos) {
         repos.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
     }
+    //--OK--<
 
-    function renderRepoDetails(repo, theRoot) {
-        createAndAppend('section', theRoot, {
+
+
+    function renderRepoDetails(repo, parent) {
+        createAndAppend('div', parent, {
             text: `
-            <div class="prop-text">
-            <div class="row">
             <p class="property"><strong>Repository: </strong></p>
             <p class="value"><a href="${repo.html_url}">${repo.name}</a></p>
-            </div>
-            <div class="row">
             <p class="property"><strong>Description: </strong></p>
             <p class="value">${repo.description}</p>
-            </div>
-            <div class="row">
             <p class="property"><strong>Forks: </strong></p>
             <p class="value">${repo.forks_count}</p>
-            </div>
-            <div class="row">
             <p class="property"><strong>Updated: </strong></p>
             <p class="value">${repo.updated_at.slice(8, 10)}/${repo.updated_at.slice(5, 7)}/${repo.updated_at.slice(0, 4)}, ${repo.updated_at.slice(12, -1)}</p>
-            </div>
-            </div>
             `,
             class: "info-block"
         });
@@ -67,29 +60,36 @@
     function main(url) {
         createAndAppend("header", theRoot, {
             text: `
-            <h1>HYF Repositories</h1>
-            `
-        })
+            <h1>Test</h1>
+            <select id="repo-selection">
+            <option value="">Javascript</option>
+            <option value="">CSS</option>
+            </select>
+            `,
+            class: "header-content"
+        });
 
         fetchJSON(url, (err, repos) => {
-            const root = document.getElementById('root');
             if (err) {
-                createAndAppend('section', root, {
-                    text: err.message,
+                createAndAppend('div', theRoot, {
+                    text: `<p>Error</p>`,
                     class: 'alert-error',
                 });
                 return;
             }
 
-            const section = createAndAppend('section', root);
+            const element = createAndAppend('div', repoCont);
             sortThemAll(repos);
-            for (let i = 0; i < 10; i++) {
-                renderRepoDetails(repos[i], section);
+            for (let i = 0; i < repos.length; i++) {
+                renderRepoDetails(repos[i], repoCont);
             }
         });
     }
 
+
+    //--OK-->
     const HYF_REPOS_URL =
-        'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
+        'https://api.github.com/ogs/HackYourFuture/repos?per_page=100';
     window.onload = () => main(HYF_REPOS_URL);
+    //--OK--<
 }
