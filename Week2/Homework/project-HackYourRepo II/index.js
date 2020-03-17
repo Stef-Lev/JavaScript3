@@ -11,9 +11,16 @@
     //--OK-->
     function fetchJSON(url, cb) {
         fetch(url)
-            .then(resp => resp.json())
-            .then(data => console.log("Loaded!", data))
-            .catch(err => cb(new Error(`Network error: ${err.status} - ${err.statusText}`)));
+            .then(response => {
+                if (response.status !== 200) {
+                    return cb(new Error(`Network error: ${response.status} - ${response.statusText}`))
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log("Loaded!", data);
+                cb(false, data);
+            })
     }
     //--OK--<
 
@@ -57,13 +64,18 @@
         });
     }
 
+    function addOptions(repo, parent) {
+        parent = document.querySelector("#repo-selection");
+        let option = document.createElement("option");
+        option.innerHTML = repo.name;
+        parent.add(option);
+    }
+
     function main(url) {
         createAndAppend("header", theRoot, {
             text: `
             <h1>Test</h1>
             <select id="repo-selection">
-            <option value="">Javascript</option>
-            <option value="">CSS</option>
             </select>
             `,
             class: "header-content"
@@ -72,7 +84,7 @@
         fetchJSON(url, (err, repos) => {
             if (err) {
                 createAndAppend('div', theRoot, {
-                    text: `<p>Error</p>`,
+                    text: err.message,
                     class: 'alert-error',
                 });
                 return;
@@ -82,14 +94,16 @@
             sortThemAll(repos);
             for (let i = 0; i < repos.length; i++) {
                 renderRepoDetails(repos[i], repoCont);
+                addOptions(repos[i], parent)
             }
+
         });
     }
 
 
     //--OK-->
     const HYF_REPOS_URL =
-        'https://api.github.com/ogs/HackYourFuture/repos?per_page=100';
+        'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
     window.onload = () => main(HYF_REPOS_URL);
     //--OK--<
 }
