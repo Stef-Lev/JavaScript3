@@ -3,12 +3,11 @@
 {
 
     let theRoot = document.querySelector("#root");
-    let mainCont = document.querySelector(".main-container")
     let repoCont = document.querySelector(".repo-container");
     let contrCont = document.querySelector(".contributor-container");
     let displayed = 0;
 
-    //--OK-->
+
     function fetchJSON(url, cb) {
         fetch(url)
             .then(response => {
@@ -22,9 +21,7 @@
                 cb(false, data);
             })
     }
-    //--OK--<
 
-    //--OK-->
     function createAndAppend(name, parent, options = {}) {
         const elem = document.createElement(name);
         parent.appendChild(elem);
@@ -37,17 +34,11 @@
         });
         return elem;
     }
-    //--OK--<
 
-
-    //--OK-->
     function sortThemAll(repos) {
         repos.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1);
     }
-    //--OK--<
 
-
-    //--OK-->
     function renderRepoDetails(repo, parent) {
         createAndAppend('div', parent, {
             text: `
@@ -63,9 +54,7 @@
             class: "info-block"
         });
     }
-    //--OK--<
 
-    //--OK-->
     function addOptions(repo, parent) {
         parent = document.querySelector("#repo-selection");
         let option = document.createElement("option");
@@ -73,22 +62,25 @@
         option.value = repo.name;
         parent.add(option);
     }
-    //--OK--<
-
 
     function renderContributions(contributors, container) {
-        container.innerHTML = `<p>Contributions</p>`;
+        container.innerHTML = `<p><strong>Contributions</strong></p>`;
         contributors.forEach(contrb => {
             container.innerHTML += `
             <div class="contributions">
             <img src="${contrb.avatar_url}" class="user-photo">
-            <a href="${contrb.html_url}">${contrb.login}</a>
+            <a href="${contrb.html_url}" class="contr-link">${contrb.login}</a>
             <span class="number-square">${contrb.contributions}</span>
             </div>
             <hr>
             `
         })
+    }
 
+    function deleteElement(el) {
+        while (el.hasChildNodes()) {
+            el.removeChild(el.firstChild)
+        }
     }
 
     function main(url) {
@@ -128,20 +120,22 @@
                 }
 
                 createAndAppend("div", contrCont);
-                renderContributions(contributors, contrCont)
-
+                renderContributions(contributors, contrCont);
+            });
+            repoSelect.addEventListener("change", () => {
+                repos.forEach(repo => {
+                    if (repo.name === repoSelect.value) { displayed = repos.indexOf(repo) }
+                })
+                let header = document.querySelector("header");
+                deleteElement(repoCont);
+                deleteElement(theRoot);
+                main(HYF_REPOS_URL);
             })
-
-
-            // renderContributions( , contrCont)
-
-
         });
     }
 
-    //--OK-->
     const HYF_REPOS_URL =
         'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
     window.onload = () => main(HYF_REPOS_URL);
-    //--OK--<
+
 }
