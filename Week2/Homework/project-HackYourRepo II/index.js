@@ -6,7 +6,7 @@
     let mainCont = document.querySelector(".main-container")
     let repoCont = document.querySelector(".repo-container");
     let contrCont = document.querySelector(".contributor-container");
-    let repoSelect = document.querySelector("#repo-selection");
+    let displayed = 0;
 
     //--OK-->
     function fetchJSON(url, cb) {
@@ -47,7 +47,7 @@
     //--OK--<
 
 
-
+    //--OK-->
     function renderRepoDetails(repo, parent) {
         createAndAppend('div', parent, {
             text: `
@@ -63,12 +63,32 @@
             class: "info-block"
         });
     }
+    //--OK--<
 
+    //--OK-->
     function addOptions(repo, parent) {
         parent = document.querySelector("#repo-selection");
         let option = document.createElement("option");
         option.innerHTML = repo.name;
+        option.value = repo.name;
         parent.add(option);
+    }
+    //--OK--<
+
+
+    function renderContributions(contributors, container) {
+        container.innerHTML = `<p>Contributions</p>`;
+        contributors.forEach(contrb => {
+            container.innerHTML += `
+            <div class="contributions">
+            <img src="${contrb.avatar_url}" class="user-photo">
+            <a href="${contrb.html_url}">${contrb.login}</a>
+            <span class="number-square">${contrb.contributions}</span>
+            </div>
+            <hr>
+            `
+        })
+
     }
 
     function main(url) {
@@ -90,16 +110,34 @@
                 return;
             }
 
-            const element = createAndAppend('div', repoCont);
             sortThemAll(repos);
             for (let i = 0; i < repos.length; i++) {
-                renderRepoDetails(repos[i], repoCont);
-                addOptions(repos[i], parent)
+                addOptions(repos[i], parent);
             }
+            let repoSelect = document.querySelector("#repo-selection");
+            repoSelect.value = repos[displayed].name;
+            renderRepoDetails(repos[displayed], repoCont);
+
+            fetchJSON(repos[displayed].contributors_url, (err, contributors) => {
+                if (err) {
+                    createAndAppend('div', theRoot, {
+                        text: err.message,
+                        class: 'alert-error',
+                    });
+                    return;
+                }
+
+                createAndAppend("div", contrCont);
+                renderContributions(contributors, contrCont)
+
+            })
+
+
+            // renderContributions( , contrCont)
+
 
         });
     }
-
 
     //--OK-->
     const HYF_REPOS_URL =
