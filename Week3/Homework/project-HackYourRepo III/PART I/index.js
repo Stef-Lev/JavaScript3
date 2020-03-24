@@ -8,18 +8,16 @@
     let displayed = 0;
 
 
-    function fetchJSON(url, cb) {
-        fetch(url)
-            .then(response => {
-                if (response.status !== 200) {
-                    return cb(new Error(`Network error: ${response.status} - ${response.statusText}`))
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log("Loaded!", data);
-                cb(false, data);
-            })
+    async function fetchJSON(url, cb) {
+        try {
+            let response = await axios.get(url);
+            console.log("Loaded!", response.data);
+            return cb(false, response.data);
+            console.log(response.status)
+        }
+        catch (err) {
+            return cb(new Error(`Network error: ${response.status} - ${response.statusText}`))
+        }
     }
 
     function createAndAppend(name, parent, options = {}) {
