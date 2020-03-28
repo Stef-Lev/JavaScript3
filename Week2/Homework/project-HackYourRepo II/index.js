@@ -86,7 +86,7 @@
     function main(url) {
         createAndAppend("header", theRoot, {
             text: `
-            <h1>Test</h1>
+            <h1>Hack your Future</h1>
             <select id="repo-selection">
             </select>
             `,

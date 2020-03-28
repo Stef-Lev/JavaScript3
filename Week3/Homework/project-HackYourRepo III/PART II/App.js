@@ -45,7 +45,7 @@
         class: 'repo-container whiteframe',
       });
       const contributors = createAndAppend('section', main, {
-        class: 'contributors-container whiteframe',
+        class: 'contributor-container whiteframe',
       });
       return { header, error, main, repo, contributors };
     }
